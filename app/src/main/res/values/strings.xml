@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MobileGitHubClient</string>
+    <string name="Client_ID">f8c5756527291555ea68</string>
+    <string name="Client_Secret">1f985d37e1cc86a17b44b2882ab330fb0508ccd3</string>
 </resources>
