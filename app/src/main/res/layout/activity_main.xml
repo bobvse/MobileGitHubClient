@@ -14,36 +14,28 @@
         android:layout_margin="5dp"
         android:text="Мобильный клиент для GitHub!" />
 
-    <EditText
-        android:id="@+id/main_activity_login_editText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Login" />
-
-    <EditText
-        android:id="@+id/main_activity_password_editText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Password" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <Button
-            android:id="@+id/main_activity_login_button"
-            android:layout_width="0dp"
+            android:id="@+id/main_activity_login_standart_button"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Login" />
+            android:text="Login Standart" />
 
         <Button
-            android:id="@+id/main_activity_logout_button"
-            android:layout_width="0dp"
+            android:id="@+id/main_activity_loginOath_button"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="LogOut" />
+            android:text="Login Oath" />
+
+        <Button
+            android:id="@+id/main_activity_loginToken_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Access Token" />
 
     </LinearLayout>
 </LinearLayout>
