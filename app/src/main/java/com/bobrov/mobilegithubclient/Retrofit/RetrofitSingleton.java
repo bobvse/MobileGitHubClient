@@ -1,9 +1,4 @@
-package com.bobrov.mobilegithubclient;
-
-import android.content.Context;
-
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+package com.bobrov.mobilegithubclient.Retrofit;
 
 import android.content.Context;
 
