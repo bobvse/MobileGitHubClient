@@ -11,7 +11,6 @@ import com.bobrov.mobilegithubclient.Retrofit.RetrofitSingleton;
 public class MobileGitHubClientApp extends Application {
     @Override
     public void onCreate() {
-        RetrofitSingleton.getInstance().init();
         super.onCreate();
     }
 }

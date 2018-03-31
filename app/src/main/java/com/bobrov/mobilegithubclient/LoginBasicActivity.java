@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.bobrov.mobilegithubclient.Retrofit.GitHubApi;
+import com.bobrov.mobilegithubclient.Retrofit.RetrofitSingleton;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -27,6 +28,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginBasicActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String MY_SETTINGS = "my_settings";
+    private static final String CLIENT_ID = "f8c5756527291555ea68";
+    private static final String CLIENT_SECRET = "1f985d37e1cc86a17b44b2882ab330fb0508ccd3";
 
     private EditText loginInput;
     private EditText passwordInput;
@@ -43,8 +46,6 @@ public class LoginBasicActivity extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.login_basic_activity);
         initComponents();
         setConfigData();
-        gsonMake();
-
     }
 
     private void initComponents() {
@@ -54,43 +55,15 @@ public class LoginBasicActivity extends AppCompatActivity implements View.OnClic
         passwordInput = findViewById(R.id.login_activity_input_password_editext);
 
         sp = getSharedPreferences(MY_SETTINGS, Context.MODE_PRIVATE);
-
     }
 
     private void setConfigData() {
         authModel = new AuthModel();
         authModel.setScopes(Arrays.asList("user", "repo", "gist", "notifications", "read:org"));
-        authModel.setNote(BuildConfig.NOTE_STRING);
-        authModel.setClientId(BuildConfig.CLIENT_ID);
-        authModel.setClientSecret(BuildConfig.CLIENT_SECRET);
+        authModel.setNote("Test");
+        authModel.setClientId(CLIENT_ID);
+        authModel.setClientSecret(CLIENT_SECRET);
         authModel.setNoteUrl("");
-    }
-
-    private Gson gsonMake() {
-        Gson gson = new GsonBuilder()
-                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-                .excludeFieldsWithModifiers(Modifier.FINAL, Modifier.TRANSIENT, Modifier.STATIC)
-                .setDateFormat("yyyy-MM-dd HH:mm:ss")
-                .setPrettyPrinting()
-                .create();
-        return gson;
-    }
-
-    private static OkHttpClient provideOkHttpClient(@Nullable String authToken, @Nullable String otp) {
-        HttpLoggingInterceptor logger = new HttpLoggingInterceptor();
-        logger.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient.Builder client = new OkHttpClient.Builder();
-        client.addInterceptor(new AuthenticationInterceptor(authToken));
-        client.addInterceptor(logger);
-        return client.build();
-    }
-
-    private static Retrofit provideRetrofit(String authToken, Gson gson) {
-        return new Retrofit.Builder()
-                .baseUrl("https://api.github.com/")
-                .client(provideOkHttpClient(authToken, null))
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
     }
 
     @Override
@@ -98,7 +71,7 @@ public class LoginBasicActivity extends AppCompatActivity implements View.OnClic
         switch (view.getId()) {
             case R.id.login_activity_ok_button:
                 authToken = EncodeHelper.basic(loginInput.getText().toString(), passwordInput.getText().toString());
-                api = provideRetrofit(authToken, gsonMake()).create(GitHubApi.class);
+                api = RetrofitSingleton.getInstance().init(authToken).create(GitHubApi.class);
                 Toast.makeText(this, authToken, Toast.LENGTH_SHORT).show();
 
                 api.doLogin(authModel).enqueue(new Callback<LoginData>() {

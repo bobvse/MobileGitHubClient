@@ -1,7 +1,17 @@
 package com.bobrov.mobilegithubclient.Retrofit;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 
+import com.bobrov.mobilegithubclient.AuthenticationInterceptor;
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.lang.reflect.Modifier;
+
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -25,16 +35,33 @@ public class RetrofitSingleton {
     }
     private RetrofitSingleton() { }
 
-    public void init() {
-
-    }
-
-    public Retrofit getRetrofit(){
+    public Retrofit init(String authtoken) {
         retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.github.com/")
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gsonMake()))
+                .client(provideOkHttpClient(authtoken))
                 .build();
         return retrofit;
     }
+
+    private Gson gsonMake() {
+        Gson gson = new GsonBuilder()
+                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                .excludeFieldsWithModifiers(Modifier.FINAL, Modifier.TRANSIENT, Modifier.STATIC)
+                .setDateFormat("yyyy-MM-dd HH:mm:ss")
+                .setPrettyPrinting()
+                .create();
+        return gson;
+    }
+
+    private static OkHttpClient provideOkHttpClient(@Nullable String authToken) {
+        HttpLoggingInterceptor logger = new HttpLoggingInterceptor();
+        logger.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient.Builder client = new OkHttpClient.Builder();
+        client.addInterceptor(new AuthenticationInterceptor(authToken));
+        client.addInterceptor(logger);
+        return client.build();
+    }
+
 }
 
