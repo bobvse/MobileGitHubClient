@@ -24,7 +24,6 @@ public final class EncodeHelper {
     public static String basic(String userName, String password, Charset charset) {
         String usernameAndPassword = userName + ":" + password;
         String encoded = ByteString.encodeString(usernameAndPassword, charset).base64();
-        //return "Basic " + encoded;
-        return "Basic Ym9idnNlQGdtYWlsLmNvbTpRMzAxNjI0ODJx";
+        return "Basic " + encoded;
     }
 }

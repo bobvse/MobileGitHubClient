@@ -2,7 +2,5 @@
     <string name="app_name">MobileGitHubClient</string>
     <string name="Client_ID_Oath">f8c5756527291555ea68</string>
     <string name="Client_Secret_Oath">1f985d37e1cc86a17b44b2882ab330fb0508ccd3</string>
-    <string name="Client_Secret_basic"> 3c2edc145b64c190ca84e9678497a6460cc9c954</string>
-    <string name="Client_ID_Basic">Iv1.6487132b50f86e1d</string>
     <string name="LoginUrl">https://api.github.com/</string>
 </resources>

@@ -25,10 +25,8 @@ public class RetrofitSingleton {
     }
     private RetrofitSingleton() { }
 
-    public void init(Context context) {
-        if(retrofit==null){
-            retrofit = getRetrofit();
-        }
+    public void init() {
+
     }
 
     public Retrofit getRetrofit(){
