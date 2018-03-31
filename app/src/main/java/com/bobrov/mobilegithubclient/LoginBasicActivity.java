@@ -27,7 +27,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginBasicActivity extends AppCompatActivity implements View.OnClickListener {
-    private static final String MY_SETTINGS = "my_settings";
+    public static final String MY_SETTINGS = "my_settings";
     private static final String CLIENT_ID = "f8c5756527291555ea68";
     private static final String CLIENT_SECRET = "1f985d37e1cc86a17b44b2882ab330fb0508ccd3";
 
@@ -54,7 +54,7 @@ public class LoginBasicActivity extends AppCompatActivity implements View.OnClic
         loginInput = findViewById(R.id.login_activity_editext_login);
         passwordInput = findViewById(R.id.login_activity_input_password_editext);
 
-        sp = getSharedPreferences(MY_SETTINGS, Context.MODE_PRIVATE);
+        sp = getSharedPreferences(MY_SETTINGS,Context.MODE_PRIVATE);
     }
 
     private void setConfigData() {
