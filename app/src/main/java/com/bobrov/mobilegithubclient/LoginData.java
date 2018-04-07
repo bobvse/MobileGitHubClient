@@ -11,7 +11,7 @@ import java.util.List;
 
 public class LoginData implements Serializable {
     @SerializedName("id")
-    private int id;
+    private String id;
     @SerializedName("url")
     private String url;
     private String token;
@@ -27,7 +27,7 @@ public class LoginData implements Serializable {
 
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 

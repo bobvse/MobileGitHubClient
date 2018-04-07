@@ -1,6 +1,5 @@
 package com.bobrov.mobilegithubclient.Retrofit;
 
-import android.content.Context;
 import android.support.annotation.Nullable;
 
 import com.bobrov.mobilegithubclient.AuthenticationInterceptor;
@@ -35,12 +34,16 @@ public class RetrofitSingleton {
     }
     private RetrofitSingleton() { }
 
-    public Retrofit init(String authtoken) {
+    public Retrofit init(String authToken) {
         retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.github.com/")
                 .addConverterFactory(GsonConverterFactory.create(gsonMake()))
-                .client(provideOkHttpClient(authtoken))
+                .client(provideOkHttpClient(authToken))
                 .build();
+        return retrofit;
+    }
+
+    public Retrofit get() {
         return retrofit;
     }
 

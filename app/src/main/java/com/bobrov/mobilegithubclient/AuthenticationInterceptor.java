@@ -1,5 +1,8 @@
 package com.bobrov.mobilegithubclient;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import java.io.IOException;
 
 import okhttp3.Interceptor;
@@ -20,10 +23,12 @@ public class AuthenticationInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request original = chain.request();
-
-        Request.Builder builder = original.newBuilder()
-                .header("Authorization", authToken);
-
+        Request.Builder builder = original.newBuilder();
+        if(authToken.contains("Basic")) {
+            builder.header("Authorization", authToken);
+        }else{
+            builder.header("Authorization","token " + authToken);
+        }
         Request request = builder.build();
         return chain.proceed(request);
 

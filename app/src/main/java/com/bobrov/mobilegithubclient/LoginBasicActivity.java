@@ -1,9 +1,9 @@
 package com.bobrov.mobilegithubclient;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
@@ -11,20 +11,11 @@ import android.widget.Toast;
 
 import com.bobrov.mobilegithubclient.Retrofit.GitHubApi;
 import com.bobrov.mobilegithubclient.Retrofit.RetrofitSingleton;
-import com.google.gson.FieldNamingPolicy;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
-import java.lang.reflect.Modifier;
 import java.util.Arrays;
-
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginBasicActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String MY_SETTINGS = "my_settings";
@@ -33,12 +24,11 @@ public class LoginBasicActivity extends AppCompatActivity implements View.OnClic
 
     private EditText loginInput;
     private EditText passwordInput;
-
     SharedPreferences sp;
-
     private String authToken;
     public AuthModel authModel;
     private GitHubApi api;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +48,7 @@ public class LoginBasicActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void setConfigData() {
+        //TODO getConfigData
         authModel = new AuthModel();
         authModel.setScopes(Arrays.asList("user", "repo", "gist", "notifications", "read:org"));
         authModel.setNote("Test");
@@ -74,13 +65,20 @@ public class LoginBasicActivity extends AppCompatActivity implements View.OnClic
                 api = RetrofitSingleton.getInstance().init(authToken).create(GitHubApi.class);
                 Toast.makeText(this, authToken, Toast.LENGTH_SHORT).show();
 
+                //TODO progress visible
+
                 api.doLogin(authModel).enqueue(new Callback<LoginData>() {
                     @Override
                     public void onResponse(Call<LoginData> call, Response<LoginData> response) {
+                        //TODO progress gone
                         LoginData loginData = response.body();
+                        //TODO constant
                         SharedPreferences.Editor e = sp.edit();
                         e.putString("Token", loginData.getToken());
+                        e.putString("id",loginData.getId());
+                        e.putString("BasicToken",authToken);
                         e.apply();
+                        startActivity(new Intent(LoginBasicActivity.this, ProfileActivity.class));
                     }
 
                     @Override

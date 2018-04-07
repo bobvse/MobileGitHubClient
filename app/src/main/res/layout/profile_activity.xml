@@ -1,9 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ProfileActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/profile_activity_id_texView"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        tools:text="id"/>
+
+    <TextView
+        android:id="@+id/profile_activity_name_texView"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        tools:text="name"/>
+
+    <TextView
+        android:id="@+id/profile_activity_repos_texView"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        tools:text="repos"/>
+
+    <Button
+        android:id="@+id/profile_activity_logout_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Logout" />
+
+</LinearLayout>
