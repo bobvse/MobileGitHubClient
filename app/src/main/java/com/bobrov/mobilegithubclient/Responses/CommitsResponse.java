@@ -16,5 +16,6 @@ public class CommitsResponse implements Serializable {
     private Commit commit;
     private OwnerResponse author;
     private OwnerResponse committer;
+
     private List<CommitParent> parents = new ArrayList<>();
 }

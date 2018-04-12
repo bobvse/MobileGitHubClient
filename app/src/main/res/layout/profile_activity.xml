@@ -25,6 +25,12 @@
         tools:text="repos"/>
 
     <Button
+        android:id="@+id/profile_activity_repos_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Repos" />
+
+    <Button
         android:id="@+id/profile_activity_logout_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

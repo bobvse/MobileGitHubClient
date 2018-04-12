@@ -57,6 +57,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private void initComponents() {
         sp = getSharedPreferences(LoginBasicActivity.MY_SETTINGS, Context.MODE_PRIVATE);
         findViewById(R.id.profile_activity_logout_button).setOnClickListener(this);
+        findViewById(R.id.profile_activity_repos_button).setOnClickListener(this);
 
         idTV = findViewById(R.id.profile_activity_id_texView);
         nameTV = findViewById(R.id.profile_activity_name_texView);
@@ -77,6 +78,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 deleteSession();
                // clearToken();
                 startActivity(new Intent(this, MainActivity.class));
+                break;
+            case R.id.profile_activity_repos_button:
+                startActivity(new Intent(this,ReposActivity.class));
                 break;
         }
     }

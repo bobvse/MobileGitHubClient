@@ -11,8 +11,4 @@ public class CommitParent implements Serializable {
     private String url;
     @SerializedName("html_url")
     private String htmlURL;
-    private Commit commit;
-    private OwnerResponse author;
-    private OwnerResponse committer;
-    private List<CommitParent> parents = new ArrayList<>();
 }

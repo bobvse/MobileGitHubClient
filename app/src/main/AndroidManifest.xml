@@ -30,7 +30,8 @@
             android:label="Авторизация с помощью токена"
             android:theme="@style/Theme.AppCompat.Dialog" />
         <activity android:name=".ProfileActivity" />
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".ReposActivity"></activity>
     </application>
 
 </manifest>

@@ -1,17 +1,16 @@
 package com.bobrov.mobilegithubclient.Retrofit;
 
 import com.bobrov.mobilegithubclient.AuthModel;
-import com.bobrov.mobilegithubclient.LoginBasicActivity;
 import com.bobrov.mobilegithubclient.LoginData;
+import com.bobrov.mobilegithubclient.Responses.ReposResponse;
 import com.bobrov.mobilegithubclient.UserResponse;
-import com.google.gson.Gson;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
-import retrofit2.http.Field;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -33,4 +32,8 @@ public interface GitHubApi {
    @Headers("Content-Type: application/json")
    @DELETE("authorizations/{id}")
    Call<Object> deleteSession(@Path("id") String userId);
+
+   @Headers("Content-Type: application/json")
+   @GET("user/repos")
+   Call<List<ReposResponse>> getRepos();
 }
