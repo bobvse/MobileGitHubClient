@@ -2,6 +2,7 @@ package com.bobrov.mobilegithubclient.Retrofit;
 
 import com.bobrov.mobilegithubclient.AuthModel;
 import com.bobrov.mobilegithubclient.LoginData;
+import com.bobrov.mobilegithubclient.Responses.CommitsResponse;
 import com.bobrov.mobilegithubclient.Responses.ReposResponse;
 import com.bobrov.mobilegithubclient.UserResponse;
 
@@ -36,4 +37,8 @@ public interface GitHubApi {
    @Headers("Content-Type: application/json")
    @GET("user/repos")
    Call<List<ReposResponse>> getRepos();
+
+   @Headers("Content-Type: application/json")
+   @GET("repos/{nameOwner}/{nameRepos}/commits")
+   Call<List<CommitsResponse>> getCommits(@Path("nameOwner") String nameOwner, @Path("nameRepos") String nameRepos);
 }

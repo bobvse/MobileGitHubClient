@@ -2,8 +2,10 @@ package com.bobrov.mobilegithubclient;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.bobrov.mobilegithubclient.Responses.ReposResponse;
@@ -21,10 +23,15 @@ public class ReposActivity extends AppCompatActivity {
     private GitHubApi api;
     SharedPreferences sp;
     private List<ReposResponse> repos = new ArrayList<>();
+    private ReposListAdapter reposListAdapter;
+        
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.repos_activity);
+        ListView reposListView = (ListView) findViewById(R.id.exercises_list_view);
+        reposListAdapter = new ReposListAdapter(this);
+        reposListView.setAdapter(reposListAdapter);
         loadRepos();
     }
 
@@ -37,7 +44,7 @@ public class ReposActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<ReposResponse>> call, Response<List<ReposResponse>> response) {
                 repos = response.body();
-                  Toast.makeText(getApplicationContext(), repos.toString(), Toast.LENGTH_SHORT).show();
+                reposListAdapter.setData(repos);
             }
 
             @Override

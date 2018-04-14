@@ -35,4 +35,69 @@ public class OwnerResponse implements Serializable {
     private String type;
     @SerializedName("site_admin")
     private String siteAdmin;
+
+    public String getId() {
+        return id;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public String getHtmlUrl() {
+        return htmlUrl;
+    }
+
+    public String getFollowersUrl() {
+        return followersUrl;
+    }
+
+    public String getFollowingUrl() {
+        return followingUrl;
+    }
+
+    public String getGitsUrl() {
+        return gitsUrl;
+    }
+
+    public String getStarredUrl() {
+        return starredUrl;
+    }
+
+    public String getSubscriptionsUrl() {
+        return subscriptionsUrl;
+    }
+
+    public String getOrganizationsUrl() {
+        return organizationsUrl;
+    }
+
+    public String getReposUrl() {
+        return reposUrl;
+    }
+
+    public String getEventsUrl() {
+        return eventsUrl;
+    }
+
+    public String getReceivedEventsUrl() {
+        return receivedEventsUrl;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getSiteAdmin() {
+        return siteAdmin;
+    }
+
 }
