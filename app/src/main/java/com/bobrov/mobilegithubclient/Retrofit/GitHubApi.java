@@ -39,6 +39,7 @@ public interface GitHubApi {
    Call<List<ReposResponse>> getRepos();
 
    @Headers("Content-Type: application/json")
-   @GET("repos/{nameOwner}/{nameRepos}/commits")
-   Call<List<CommitsResponse>> getCommits(@Path("nameOwner") String nameOwner, @Path("nameRepos") String nameRepos);
+   @GET("repos/{nameOwner}/{nameRepo}/commits")
+   Call<List<CommitsResponse>> getCommits(@Path("nameOwner") String nameOwner,@Path("nameRepo") String nameRepo);
+
 }

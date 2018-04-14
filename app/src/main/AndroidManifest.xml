@@ -31,7 +31,8 @@
             android:theme="@style/Theme.AppCompat.Dialog" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".ReposActivity"></activity>
+        <activity android:name=".ReposActivity" />
+        <activity android:name=".CommitsActivity"></activity>
     </application>
 
 </manifest>
