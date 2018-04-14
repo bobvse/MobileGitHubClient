@@ -44,6 +44,10 @@ public interface GitHubApi {
    Call<List<CommitsResponse>> getCommits(@Path("nameOwner") String nameOwner,@Path("nameRepo") String nameRepo);
 
    @Headers("Content-Type: application/json")
+   @GET("repos/{nameOwner}/{nameRepo}/commits/{sha}")
+   Call<List<CommitsResponse>> getBranchCommits(@Path("nameOwner") String nameOwner,@Path("nameRepo") String nameRepo,@Path("sha") String sha);
+
+   @Headers("Content-Type: application/json")
    @GET("repos/{nameOwner}/{nameRepo}/branches")
    Call<List<BranchResponse>> getBranches(@Path("nameOwner") String nameOwner, @Path("nameRepo") String nameRepo);
 

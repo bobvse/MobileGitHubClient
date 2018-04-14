@@ -14,7 +14,7 @@ public class BranchResponse implements Serializable {
         return commit;
     }
 
-    private static class CommitInBranch implements Serializable {
+    public static class CommitInBranch implements Serializable {
         private String sha;
         private String url;
 
