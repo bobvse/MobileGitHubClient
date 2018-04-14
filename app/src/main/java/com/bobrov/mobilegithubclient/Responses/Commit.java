@@ -11,8 +11,36 @@ public class Commit implements Serializable {
     private String commetCount;
     private AuthorAndCommiter author;
     private AuthorAndCommiter comitter;
-    private  Tree tree;
+    private Tree tree;
     private Verification verification;
+
+    public String getMessage() {
+        return message;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public String getCommetCount() {
+        return commetCount;
+    }
+
+    public AuthorAndCommiter getAuthor() {
+        return author;
+    }
+
+    public AuthorAndCommiter getComitter() {
+        return comitter;
+    }
+
+    public Tree getTree() {
+        return tree;
+    }
+
+    public Verification getVerification() {
+        return verification;
+    }
 
     private static class Tree implements Serializable {
         private String sha;

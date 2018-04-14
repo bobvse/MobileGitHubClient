@@ -3,13 +3,11 @@ package com.bobrov.mobilegithubclient;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.bobrov.mobilegithubclient.Responses.ReposResponse;
 import com.bobrov.mobilegithubclient.Retrofit.GitHubApi;
@@ -34,7 +32,7 @@ public class ReposActivity extends AppCompatActivity implements AdapterView.OnIt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.repos_activity);
-        ListView reposListView = findViewById(R.id.exercises_list_view);
+        ListView reposListView = findViewById(R.id.repos_list_view);
         reposListAdapter = new ReposListAdapter(this);
         reposListView.setAdapter(reposListAdapter);
         reposListView.setOnItemClickListener(this);

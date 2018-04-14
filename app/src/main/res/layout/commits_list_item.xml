@@ -12,18 +12,18 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/repos_list_item_name_tv"
+            android:id="@+id/commits_list_item_message_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            tools:text="Название" />
+            tools:text="Message" />
 
         <TextView
-            android:id="@+id/repos_list_item_description_tv"
+            android:id="@+id/commits_list_item_commiter_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLines="2"
-            tools:text="Описание" />
+            tools:text="Commiter" />
 
     </LinearLayout>
 </LinearLayout>

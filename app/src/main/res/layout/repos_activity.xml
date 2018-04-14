@@ -6,7 +6,7 @@
     tools:context=".ReposActivity">
 
     <ListView
-        android:id="@+id/exercises_list_view"
+        android:id="@+id/repos_list_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/repos_list_item" />

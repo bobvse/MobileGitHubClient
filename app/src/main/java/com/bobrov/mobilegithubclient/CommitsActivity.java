@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ListView;
 
 import com.bobrov.mobilegithubclient.Responses.CommitsResponse;
 import com.bobrov.mobilegithubclient.Responses.ReposResponse;
@@ -21,20 +22,24 @@ public class CommitsActivity extends AppCompatActivity {
     private List<CommitsResponse> commitsResponses;
     private GitHubApi api;
     SharedPreferences sp;
+    private CommitsListAdapter commitsListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.commits_activity);
         getData();
-        loadRepos();
+        ListView reposListView = findViewById(R.id.commits_list_view);
+        commitsListAdapter = new CommitsListAdapter(this);
+        reposListView.setAdapter(commitsListAdapter);
+        loadCommits();
     }
 
     private void getData() {
         currentRepo = (ReposResponse) getIntent().getSerializableExtra(ReposActivity.EXTRA_REPOSITORY_KEY);
     }
 
-    private void loadRepos() {
+    private void loadCommits() {
         sp = getSharedPreferences(LoginBasicActivity.MY_SETTINGS, Context.MODE_PRIVATE);
         //String token = sp.getString("Token", null);
         String token = sp.getString("Token", null);
@@ -43,7 +48,7 @@ public class CommitsActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<CommitsResponse>> call, Response<List<CommitsResponse>> response) {
                 commitsResponses = response.body();
-                commitsResponses.clear();
+                commitsListAdapter.setData(commitsResponses);
             }
 
             @Override
