@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.bobrov.mobilegithubclient.Responses.BranchResponse;
 import com.bobrov.mobilegithubclient.Responses.CommitsResponse;
@@ -31,12 +32,14 @@ public class CommitsActivity extends AppCompatActivity{
     private Spinner checkBranch;
     private BranchesListAdapter branchesListAdapter;
     ListView commitsListView;
+    private TextView commitsCount;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.commits_activity);
+        commitsCount = findViewById(R.id.commit_count_tv);
 
         checkBranch = findViewById(R.id.branch_spinner);
 
@@ -50,7 +53,7 @@ public class CommitsActivity extends AppCompatActivity{
 
         loadCommits();
         loadBranches();
-      //  checkBranchesCommits();
+        checkBranchesCommits();
     }
 
     private void getData() {
@@ -95,41 +98,42 @@ public class CommitsActivity extends AppCompatActivity{
         });
     }
 
-//    private void checkBranchesCommits() {
-//        checkBranch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-//                BranchResponse br1 = (BranchResponse) branchesListAdapter.getItem(position);
-//                loadCommitsBranches(br1.getCommit().getSha());
-//
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> adapterView) {
-//                commitsListAdapter.notifyDataSetChanged();
-//            }
-//        });
-//    }
+    private void checkBranchesCommits() {
+        checkBranch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+                BranchResponse br1 = (BranchResponse) branchesListAdapter.getItem(position);
+                loadCommitsBranches(br1.getCommit().getSha());
 
-//    private void loadCommitsBranches(String sha) {
-//        sp = getSharedPreferences(LoginBasicActivity.MY_SETTINGS, Context.MODE_PRIVATE);
-//        //String token = sp.getString("Token", null);
-//        String token = sp.getString("Token", null);
-//        api = RetrofitSingleton.getInstance().init(token).create(GitHubApi.class);
-//
-//        api.getBranchCommits(currentRepo.getOwner().getLogin(),currentRepo.getName(),sha).enqueue(new Callback<List<CommitsResponse>>() {
-//            @Override
-//            public void onResponse(Call<List<CommitsResponse>> call, Response<List<CommitsResponse>> response) {
-//                commitsResponses = response.body();
-//                commitsListAdapter.setData(commitsResponses);
-//                commitsListAdapter.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<CommitsResponse>> call, Throwable t) {
-//
-//            }
-//        });
-//    }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+    }
+
+    private void loadCommitsBranches(String sha) {
+        sp = getSharedPreferences(LoginBasicActivity.MY_SETTINGS, Context.MODE_PRIVATE);
+        //String token = sp.getString("Token", null);
+        String token = sp.getString("Token", null);
+        api = RetrofitSingleton.getInstance().init(token).create(GitHubApi.class);
+
+        api.getBranchCommits(currentRepo.getOwner().getLogin(),currentRepo.getName(),sha).enqueue(new Callback<List<CommitsResponse>>() {
+            @Override
+            public void onResponse(Call<List<CommitsResponse>> call, Response<List<CommitsResponse>> response) {
+                commitsResponses = response.body();
+                commitsListAdapter.setData(commitsResponses);
+                ///TODO не костыльно сделать окончание слова коммит(множ + ед. число)
+                commitsCount.setText(commitsResponses.size() + " commits");
+                commitsListAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<List<CommitsResponse>> call, Throwable t) {
+
+            }
+        });
+    }
 
 }
