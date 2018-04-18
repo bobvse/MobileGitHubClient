@@ -13,6 +13,8 @@ import java.util.List;
 
 public class CommitsListAdapter extends BaseAdapter {
 
+    private static final long SECOND_IN_DAY = 60 * 60 * 24;
+
     private Context context;
     private List<CommitsResponse> commitsList;
 
@@ -21,6 +23,16 @@ public class CommitsListAdapter extends BaseAdapter {
     }
 
     public void setData(List<CommitsResponse> commitsList) {
+//        for (int i = 0; i<commitsList.size(); i++) {
+//            //TODO index of bound ex
+//            long currentDate = commitsList.get(i).getCommit().getAuthor().getDate();
+//            long nextDate= commitsList.get(i + 1).getCommit().getAuthor().getDate();
+//            if ((Math.abs(currentDate - nextDate) > SECOND_IN_DAY)) {
+//
+//            } else {
+//
+//            }
+//        }
         this.commitsList = commitsList;
         notifyDataSetChanged();
     }
@@ -31,7 +43,7 @@ public class CommitsListAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
+    public CommitsResponse getItem(int position) {
         return commitsList.get(position);
     }
 
@@ -52,7 +64,7 @@ public class CommitsListAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        CommitsResponse commitsResponse = (CommitsResponse) getItem(position);
+        CommitsResponse commitsResponse = getItem(position);
         viewHolder.commitMessage.setText(commitsResponse.getCommit().getMessage());
         viewHolder.commitAuthor.setText("committed by " + commitsResponse.getAuthor().getLogin());
 

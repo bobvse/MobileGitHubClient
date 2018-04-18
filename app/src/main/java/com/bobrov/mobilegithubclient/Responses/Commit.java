@@ -9,8 +9,8 @@ public class Commit implements Serializable {
     private String url;
     @SerializedName("comment_count")
     private String commetCount;
-    private AuthorAndCommiter author;
-    private AuthorAndCommiter comitter;
+    private AuthorAndCommitter author;
+    private AuthorAndCommitter committer;
     private Tree tree;
     private Verification verification;
 
@@ -26,12 +26,12 @@ public class Commit implements Serializable {
         return commetCount;
     }
 
-    public AuthorAndCommiter getAuthor() {
+    public AuthorAndCommitter getAuthor() {
         return author;
     }
 
-    public AuthorAndCommiter getComitter() {
-        return comitter;
+    public AuthorAndCommitter getCommitter() {
+        return committer;
     }
 
     public Tree getTree() {

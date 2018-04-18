@@ -3,14 +3,12 @@ package com.bobrov.mobilegithubclient.Retrofit;
 import android.support.annotation.Nullable;
 
 import com.bobrov.mobilegithubclient.AuthenticationInterceptor;
-import com.bobrov.mobilegithubclient.Responses.ReposResponse;
+import com.bobrov.mobilegithubclient.Responses.AuthorAndCommitter;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Modifier;
-import java.util.List;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -56,6 +54,7 @@ public class RetrofitSingleton {
                 .excludeFieldsWithModifiers(Modifier.FINAL, Modifier.TRANSIENT, Modifier.STATIC)
                 .setDateFormat("yyyy-MM-dd HH:mm:ss")
                 .setPrettyPrinting()
+                .registerTypeAdapter(AuthorAndCommitter.class,new DataDeserializer())
                 .create();
         return gson;
     }
