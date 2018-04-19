@@ -7,8 +7,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.bobrov.mobilegithubclient.Responses.CommitEntity;
 import com.bobrov.mobilegithubclient.Responses.CommitsResponse;
+import com.bobrov.mobilegithubclient.Responses.Entity;
+import com.bobrov.mobilegithubclient.Responses.SeparatorEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CommitsListAdapter extends BaseAdapter {
@@ -17,22 +21,31 @@ public class CommitsListAdapter extends BaseAdapter {
 
     private Context context;
     private List<CommitsResponse> commitsList;
+    private List<Entity> dataList = new ArrayList<>();
 
     public CommitsListAdapter(Context context) {
         this.context = context;
     }
 
     public void setData(List<CommitsResponse> commitsList) {
-//        for (int i = 0; i<commitsList.size(); i++) {
-//            //TODO index of bound ex
-//            long currentDate = commitsList.get(i).getCommit().getAuthor().getDate();
-//            long nextDate= commitsList.get(i + 1).getCommit().getAuthor().getDate();
-//            if ((Math.abs(currentDate - nextDate) > SECOND_IN_DAY)) {
-//
-//            } else {
-//
-//            }
-//        }
+        long currentDate = 0;
+        long nextDate = 0;
+        for (int i = 0; i < commitsList.size(); i++) {
+            currentDate = commitsList.get(i).getCommit().getAuthor().getDate();
+            if (i < commitsList.size()-1) {
+                nextDate = commitsList.get(i + 1).getCommit().getAuthor().getDate();
+            } else {
+                nextDate = commitsList.get(i).getCommit().getAuthor().getDate();
+            }
+            //TODO если один объект то дополнительный иф
+            if ((Math.abs(currentDate - nextDate) > SECOND_IN_DAY)) {
+                dataList.add(new SeparatorEntity(commitsList.get(i).getCommit().getAuthor().getDate()));
+                dataList.add(new CommitEntity(commitsList.get(i).getCommit().getMessage(), commitsList.get(i).getAuthor().getLogin()));
+            } else {
+                dataList.add(new CommitEntity(commitsList.get(i).getCommit().getMessage(), commitsList.get(i).getAuthor().getLogin()));
+            }
+        }
+
         this.commitsList = commitsList;
         notifyDataSetChanged();
     }
@@ -41,6 +54,14 @@ public class CommitsListAdapter extends BaseAdapter {
     public int getCount() {
         return commitsList == null ? 0 : commitsList.size();
     }
+
+    @Override
+    public int getItemViewType(int position) {
+        return 1;
+        //TODO logic
+    }
+
+
 
     @Override
     public CommitsResponse getItem(int position) {

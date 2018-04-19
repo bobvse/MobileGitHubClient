@@ -50,7 +50,7 @@ public class CommitsActivity extends AppCompatActivity{
 
         commitsListView.setAdapter(commitsListAdapter);
 
-     //   loadCommits();
+        loadCommits();
         loadBranches();
         checkBranchesCommits();
     }
@@ -59,24 +59,24 @@ public class CommitsActivity extends AppCompatActivity{
         currentRepo = (ReposResponse) getIntent().getSerializableExtra(ReposActivity.EXTRA_REPOSITORY_KEY);
     }
 
-//    private void loadCommits() {
-//        sp = getSharedPreferences(LoginBasicActivity.MY_SETTINGS, Context.MODE_PRIVATE);
-//        //String token = sp.getString("Token", null);
-//        String token = sp.getString("Token", null);
-//        api = RetrofitSingleton.getInstance().init(token).create(GitHubApi.class);
-//        api.getCommits(currentRepo.getOwner().getLogin(), currentRepo.getName()).enqueue(new Callback<List<CommitsResponse>>() {
-//            @Override
-//            public void onResponse(Call<List<CommitsResponse>> call, Response<List<CommitsResponse>> response) {
-//                commitsResponses = response.body();
-//                commitsListAdapter.setData(commitsResponses);
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<CommitsResponse>> call, Throwable t) {
-//
-//            }
-//        });
-//    }
+    private void loadCommits() {
+        sp = getSharedPreferences(LoginBasicActivity.MY_SETTINGS, Context.MODE_PRIVATE);
+        //String token = sp.getString("Token", null);
+        String token = sp.getString("Token", null);
+        api = RetrofitSingleton.getInstance().init(token).create(GitHubApi.class);
+        api.getCommits(currentRepo.getOwner().getLogin(), currentRepo.getName()).enqueue(new Callback<List<CommitsResponse>>() {
+            @Override
+            public void onResponse(Call<List<CommitsResponse>> call, Response<List<CommitsResponse>> response) {
+                commitsResponses = response.body();
+                commitsListAdapter.setData(commitsResponses);
+            }
+
+            @Override
+            public void onFailure(Call<List<CommitsResponse>> call, Throwable t) {
+
+            }
+        });
+    }
 
     private void loadBranches() {
         sp = getSharedPreferences(LoginBasicActivity.MY_SETTINGS, Context.MODE_PRIVATE);
