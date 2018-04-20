@@ -17,6 +17,7 @@ public class SeparatorEntity extends Entity {
         this.date = date;
     }
 
+    @Override
     public int getType(){
         return Entity.SEPARATOR_TYPE;
     }

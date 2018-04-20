@@ -4,14 +4,16 @@ public class CommitEntity extends Entity {
     private String message;
     private String author;
 
-    public CommitEntity(){}
+    public CommitEntity() {
+    }
 
     public CommitEntity(String message, String author) {
         this.message = message;
         this.author = author;
     }
 
-    public int getType(){
+    @Override
+    public int getType() {
         return Entity.COMMIT_TYPE;
     }
 
