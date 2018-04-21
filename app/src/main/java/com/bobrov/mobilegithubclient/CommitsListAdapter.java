@@ -32,7 +32,8 @@ public class CommitsListAdapter extends BaseAdapter {
     public void setData(List<CommitsResponse> commitsList) {
         long currentDate;
         long nextDate;
-        dataList = new ArrayList<>();
+        dataList = new ArrayList<Entity>();
+
         for (int i = 0; i < commitsList.size(); i++) {
             currentDate = commitsList.get(i).getCommit().getAuthor().getDate();
             if (i < commitsList.size() - 1) {
@@ -40,7 +41,6 @@ public class CommitsListAdapter extends BaseAdapter {
             } else {
                 nextDate = commitsList.get(i).getCommit().getAuthor().getDate();
             }
-            //TODO если один объект то дополнительный иф
             if (commitsList.size() == 1) {
                 dataList.add(new SeparatorEntity(commitsList.get(i).getCommit().getAuthor().getDate()));
                 dataList.add(new CommitEntity(commitsList.get(i).getCommit().getMessage(), commitsList.get(i).getAuthor().getLogin()));
@@ -77,37 +77,28 @@ public class CommitsListAdapter extends BaseAdapter {
         return position;
     }
 
+    //TODO Это важно почему то, и при 2х не пашет, узнать где используется
+    @Override
+    public int getViewTypeCount() {
+        return 3;
+    }
+
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        //TODO КОСТЫЫЛЬ!
-        ViewHolderCommit viewHolderCommit = null;
-        ViewHolderData viewHolderData = null;
+        ViewHolderCommit viewHolderCommit;
+        ViewHolderData viewHolderData;
         int type = getItemViewType(position);
-        if (convertView == null) {
-            switch (type) {
-                case Entity.SEPARATOR_TYPE:
+
+        switch (type) {
+            case Entity.SEPARATOR_TYPE:
+                if (convertView == null) {
                     convertView = LayoutInflater.from(context).inflate(R.layout.commits_list_separator, parent, false);
                     viewHolderData = new ViewHolderData(convertView);
                     convertView.setTag(viewHolderData);
-                    break;
-                case Entity.COMMIT_TYPE:
-                    convertView = LayoutInflater.from(context).inflate(R.layout.commits_list_item, parent, false);
-                    viewHolderCommit = new ViewHolderCommit(convertView);
-                    convertView.setTag(viewHolderCommit);
-                    break;
-            }
-        } else {
-            switch (type) {
-                case Entity.SEPARATOR_TYPE:
+                } else {
                     viewHolderData = (ViewHolderData) convertView.getTag();
-                    break;
-                case Entity.COMMIT_TYPE:
-                    viewHolderCommit = (ViewHolderCommit) convertView.getTag();
-                    break;
-            }
-        }
-        switch (type) {
-            case Entity.SEPARATOR_TYPE:
+                }
                 SeparatorEntity separatorEntity = (SeparatorEntity) getItem(position);
 
                 SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy H:mm", Locale.getDefault());
@@ -115,6 +106,13 @@ public class CommitsListAdapter extends BaseAdapter {
                 viewHolderData.date.setText(dateString);
                 break;
             case Entity.COMMIT_TYPE:
+                if (convertView == null) {
+                    convertView = LayoutInflater.from(context).inflate(R.layout.commits_list_item, parent, false);
+                    viewHolderCommit = new ViewHolderCommit(convertView);
+                    convertView.setTag(viewHolderCommit);
+                } else {
+                    viewHolderCommit = (ViewHolderCommit) convertView.getTag();
+                }
                 CommitEntity commitEntity = (CommitEntity) getItem(position);
                 viewHolderCommit.commitMessage.setText(commitEntity.getMessage());
                 viewHolderCommit.commitAuthor.setText("committed by " + commitEntity.getAuthor());
@@ -128,8 +126,8 @@ public class CommitsListAdapter extends BaseAdapter {
         TextView commitAuthor;
 
         public ViewHolderCommit(View view) {
-            commitMessage = (TextView) view.findViewById(R.id.commits_list_item_message_tv);
-            commitAuthor = (TextView) view.findViewById(R.id.commits_list_item_commiter_tv);
+            commitMessage = view.findViewById(R.id.commits_list_item_message_tv);
+            commitAuthor = view.findViewById(R.id.commits_list_item_commiter_tv);
         }
     }
 
@@ -137,7 +135,7 @@ public class CommitsListAdapter extends BaseAdapter {
         TextView date;
 
         public ViewHolderData(View view) {
-            date = (TextView) view.findViewById(R.id.commits_list_date_tv);
+            date = view.findViewById(R.id.commits_list_date_tv);
         }
     }
 
