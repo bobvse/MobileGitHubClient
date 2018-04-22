@@ -22,7 +22,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CommitsActivity extends AppCompatActivity{
+public class CommitsActivity extends AppCompatActivity {
     private ReposResponse currentRepo;
     private List<CommitsResponse> commitsResponses;
     private List<BranchResponse> branches;
@@ -118,7 +118,7 @@ public class CommitsActivity extends AppCompatActivity{
         String token = sp.getString("Token", null);
         api = RetrofitSingleton.getInstance().init(token).create(GitHubApi.class);
 
-        api.getBranchCommits(currentRepo.getOwner().getLogin(),currentRepo.getName(),sha).enqueue(new Callback<List<CommitsResponse>>() {
+        api.getBranchCommits(currentRepo.getOwner().getLogin(), currentRepo.getName(), sha).enqueue(new Callback<List<CommitsResponse>>() {
             @Override
             public void onResponse(Call<List<CommitsResponse>> call, Response<List<CommitsResponse>> response) {
                 commitsResponses = response.body();

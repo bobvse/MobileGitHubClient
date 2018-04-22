@@ -19,7 +19,7 @@ import java.util.Locale;
 
 public class CommitsListAdapter extends BaseAdapter {
 
-    private static final long SECOND_IN_DAY = 60 * 60 * 24;
+    private static final long SECOND_IN_DAY = 60 * 60 * 24 * 1000;
 
     private Context context;
     private List<CommitsResponse> commitsList;
@@ -32,9 +32,11 @@ public class CommitsListAdapter extends BaseAdapter {
     public void setData(List<CommitsResponse> commitsList) {
         long currentDate;
         long nextDate;
-        dataList = new ArrayList<Entity>();
 
+        dataList = new ArrayList<Entity>();
+        int count = 0;
         for (int i = 0; i < commitsList.size(); i++) {
+
             currentDate = commitsList.get(i).getCommit().getAuthor().getDate();
             if (i < commitsList.size() - 1) {
                 nextDate = commitsList.get(i + 1).getCommit().getAuthor().getDate();
@@ -44,15 +46,25 @@ public class CommitsListAdapter extends BaseAdapter {
             if (commitsList.size() == 1) {
                 dataList.add(new SeparatorEntity(commitsList.get(i).getCommit().getAuthor().getDate()));
                 dataList.add(new CommitEntity(commitsList.get(i).getCommit().getMessage(), commitsList.get(i).getAuthor().getLogin()));
+
             } else {
                 if ((Math.abs(nextDate - currentDate) > SECOND_IN_DAY)) {
                     dataList.add(new SeparatorEntity(commitsList.get(i).getCommit().getAuthor().getDate()));
                     dataList.add(new CommitEntity(commitsList.get(i).getCommit().getMessage(), commitsList.get(i).getAuthor().getLogin()));
                 } else {
+                    count++;
                     dataList.add(new CommitEntity(commitsList.get(i).getCommit().getMessage(), commitsList.get(i).getAuthor().getLogin()));
+                    if (count == commitsList.size()) {
+                        dataList.add(0, new SeparatorEntity(commitsList.get(0).getCommit().getAuthor().getDate()));
+                    }
                 }
             }
+            if (i == commitsList.size() - 1) {
+                dataList.add(0, new SeparatorEntity(commitsList.get(0).getCommit().getAuthor().getDate()));
+            }
         }
+
+
         notifyDataSetChanged();
     }
 
@@ -77,10 +89,10 @@ public class CommitsListAdapter extends BaseAdapter {
         return position;
     }
 
-    //TODO Это важно почему то, и при 2х не пашет, узнать где используется
+    //TODO Это важно почему то, узнать где используется
     @Override
     public int getViewTypeCount() {
-        return 3;
+        return 2;
     }
 
 
