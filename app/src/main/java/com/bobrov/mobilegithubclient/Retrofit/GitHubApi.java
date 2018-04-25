@@ -1,11 +1,10 @@
 package com.bobrov.mobilegithubclient.Retrofit;
 
-import com.bobrov.mobilegithubclient.AuthModel;
 import com.bobrov.mobilegithubclient.LoginData;
 import com.bobrov.mobilegithubclient.Responses.BranchResponse;
 import com.bobrov.mobilegithubclient.Responses.CommitsResponse;
 import com.bobrov.mobilegithubclient.Responses.ReposResponse;
-import com.bobrov.mobilegithubclient.UserResponse;
+import com.bobrov.mobilegithubclient.Responses.UserResponse;
 
 import java.util.List;
 

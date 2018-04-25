@@ -1,4 +1,4 @@
-package com.bobrov.mobilegithubclient;
+package com.bobrov.mobilegithubclient.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.bobrov.mobilegithubclient.R;
 import com.bobrov.mobilegithubclient.Responses.CommitEntity;
 import com.bobrov.mobilegithubclient.Responses.CommitsResponse;
 import com.bobrov.mobilegithubclient.Responses.Entity;
@@ -19,54 +20,92 @@ import java.util.Locale;
 
 public class CommitsListAdapter extends BaseAdapter {
 
+    //TODO millis
     private static final long SECOND_IN_DAY = 60 * 60 * 24 * 1000;
 
     private Context context;
-    private List<CommitsResponse> commitsList;
     private List<Entity> dataList;
 
     public CommitsListAdapter(Context context) {
         this.context = context;
     }
 
-    public void setData(List<CommitsResponse> commitsList) {
-        long currentDate;
-        long nextDate;
+//    public void setData(List<CommitsResponse> commitsList) {
+//        long currentDate;
+//        long nextDate;
+//
+//        dataList = new ArrayList<>();
+//        int count = 0;
+//        for (int i = 0; i < commitsList.size(); i++) {
+//            currentDate = commitsList.get(i).getCommit().getAuthor().getDate();
+//            if (i < commitsList.size() - 1) {
+//                nextDate = commitsList.get(i + 1).getCommit().getAuthor().getDate();
+//            } else {
+//                nextDate = commitsList.get(i).getCommit().getAuthor().getDate();
+//            }
+//
+//            if (commitsList.size() == 1) {
+//                dataList.add(new SeparatorEntity(commitsList.get(i).getCommit().getAuthor().getDate()));
+//                dataList.add(new CommitEntity(commitsList.get(i).getCommit().getMessage(), commitsList.get(i).getAuthor().getLogin()));
+//
+//            } else {
+//                if ((Math.abs(nextDate - currentDate) > SECOND_IN_DAY)) {
+//                    dataList.add(new SeparatorEntity(commitsList.get(i).getCommit().getAuthor().getDate()));
+//                    dataList.add(new CommitEntity(commitsList.get(i).getCommit().getMessage(), commitsList.get(i).getAuthor().getLogin()));
+//                } else {
+//                    count++;
+//                    dataList.add(new CommitEntity(commitsList.get(i).getCommit().getMessage(), commitsList.get(i).getAuthor().getLogin()));
+//                    if (count == commitsList.size()) {
+//                        dataList.add(0, new SeparatorEntity(commitsList.get(0).getCommit().getAuthor().getDate()));
+//                    }
+//                }
+//            }
+//
+//            if (i == commitsList.size() - 1) {
+//                dataList.add(0, new SeparatorEntity(commitsList.get(0).getCommit().getAuthor().getDate()));
+//            }
+//        }
+//
+//
+//        notifyDataSetChanged();
+//    }
 
-        dataList = new ArrayList<Entity>();
+    public void setData(List<CommitsResponse> commitsList) {
+        int currentDate;
+        int nextDate;
+
+        dataList = new ArrayList<>();
         int count = 0;
         for (int i = 0; i < commitsList.size(); i++) {
-
-            currentDate = commitsList.get(i).getCommit().getAuthor().getDate();
+            currentDate = commitsList.get(i).getCommit().getAuthor().getDay();
             if (i < commitsList.size() - 1) {
-                nextDate = commitsList.get(i + 1).getCommit().getAuthor().getDate();
+                nextDate = commitsList.get(i + 1).getCommit().getAuthor().getDay();
             } else {
-                nextDate = commitsList.get(i).getCommit().getAuthor().getDate();
+                nextDate = commitsList.get(i).getCommit().getAuthor().getDay();
             }
-            if (commitsList.size() == 1) {
-                dataList.add(new SeparatorEntity(commitsList.get(i).getCommit().getAuthor().getDate()));
-                dataList.add(new CommitEntity(commitsList.get(i).getCommit().getMessage(), commitsList.get(i).getAuthor().getLogin()));
 
-            } else {
-                if ((Math.abs(nextDate - currentDate) > SECOND_IN_DAY)) {
-                    dataList.add(new SeparatorEntity(commitsList.get(i).getCommit().getAuthor().getDate()));
+            if (currentDate != nextDate) {
+                if (i != 0) {
+                    dataList.add(new SeparatorEntity(commitsList.get(i-1).getCommit().getAuthor().getDate()));
                     dataList.add(new CommitEntity(commitsList.get(i).getCommit().getMessage(), commitsList.get(i).getAuthor().getLogin()));
                 } else {
-                    count++;
+                    dataList.add(new SeparatorEntity(commitsList.get(i).getCommit().getAuthor().getDate()));
                     dataList.add(new CommitEntity(commitsList.get(i).getCommit().getMessage(), commitsList.get(i).getAuthor().getLogin()));
-                    if (count == commitsList.size()) {
-                        dataList.add(0, new SeparatorEntity(commitsList.get(0).getCommit().getAuthor().getDate()));
-                    }
                 }
+            } else {
+                count++;
+                dataList.add(new CommitEntity(commitsList.get(i).getCommit().getMessage(), commitsList.get(i).getAuthor().getLogin()));
+                if (count == commitsList.size()) {
+                    dataList.add(0, new SeparatorEntity(commitsList.get(0).getCommit().getAuthor().getDate()));
+                }
+
             }
-            if (i == commitsList.size() - 1) {
-                dataList.add(0, new SeparatorEntity(commitsList.get(0).getCommit().getAuthor().getDate()));
-            }
+
+
         }
-
-
         notifyDataSetChanged();
     }
+
 
     @Override
     public int getCount() {
@@ -89,7 +128,6 @@ public class CommitsListAdapter extends BaseAdapter {
         return position;
     }
 
-    //TODO Это важно почему то, узнать где используется
     @Override
     public int getViewTypeCount() {
         return 2;
@@ -98,12 +136,11 @@ public class CommitsListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolderCommit viewHolderCommit;
-        ViewHolderData viewHolderData;
         int type = getItemViewType(position);
 
         switch (type) {
             case Entity.SEPARATOR_TYPE:
+                ViewHolderData viewHolderData;
                 if (convertView == null) {
                     convertView = LayoutInflater.from(context).inflate(R.layout.commits_list_separator, parent, false);
                     viewHolderData = new ViewHolderData(convertView);
@@ -113,11 +150,13 @@ public class CommitsListAdapter extends BaseAdapter {
                 }
                 SeparatorEntity separatorEntity = (SeparatorEntity) getItem(position);
 
+                //TODO
                 SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy H:mm", Locale.getDefault());
                 String dateString = sdf.format(separatorEntity.getDate());
                 viewHolderData.date.setText(dateString);
                 break;
             case Entity.COMMIT_TYPE:
+                ViewHolderCommit viewHolderCommit;
                 if (convertView == null) {
                     convertView = LayoutInflater.from(context).inflate(R.layout.commits_list_item, parent, false);
                     viewHolderCommit = new ViewHolderCommit(convertView);
@@ -133,20 +172,20 @@ public class CommitsListAdapter extends BaseAdapter {
         return convertView;
     }
 
-    private class ViewHolderCommit {
-        TextView commitMessage;
-        TextView commitAuthor;
+    private static class ViewHolderCommit {
+        private TextView commitMessage;
+        private TextView commitAuthor;
 
-        public ViewHolderCommit(View view) {
+        ViewHolderCommit(View view) {
             commitMessage = view.findViewById(R.id.commits_list_item_message_tv);
             commitAuthor = view.findViewById(R.id.commits_list_item_commiter_tv);
         }
     }
 
-    private class ViewHolderData {
-        TextView date;
+    private static class ViewHolderData {
+        private TextView date;
 
-        public ViewHolderData(View view) {
+        ViewHolderData(View view) {
             date = view.findViewById(R.id.commits_list_date_tv);
         }
     }

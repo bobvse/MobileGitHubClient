@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.bobrov.mobilegithubclient.Adapters.ReposListAdapter;
 import com.bobrov.mobilegithubclient.Responses.ReposResponse;
 import com.bobrov.mobilegithubclient.Retrofit.GitHubApi;
 import com.bobrov.mobilegithubclient.Retrofit.RetrofitSingleton;

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bobrov.mobilegithubclient.Responses.UserResponse;
 import com.bobrov.mobilegithubclient.Retrofit.GitHubApi;
 import com.bobrov.mobilegithubclient.Retrofit.RetrofitSingleton;
 

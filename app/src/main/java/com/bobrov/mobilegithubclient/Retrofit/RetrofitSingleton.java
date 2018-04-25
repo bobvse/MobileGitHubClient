@@ -2,7 +2,6 @@ package com.bobrov.mobilegithubclient.Retrofit;
 
 import android.support.annotation.Nullable;
 
-import com.bobrov.mobilegithubclient.AuthenticationInterceptor;
 import com.bobrov.mobilegithubclient.Responses.AuthorAndCommitter;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;

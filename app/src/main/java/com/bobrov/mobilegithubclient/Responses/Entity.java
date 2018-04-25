@@ -7,5 +7,4 @@ public abstract class Entity {
     public static final int COMMIT_TYPE = 1;
 
     public abstract int getType();
-
 }

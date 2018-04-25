@@ -1,4 +1,4 @@
-package com.bobrov.mobilegithubclient;
+package com.bobrov.mobilegithubclient.Retrofit;
 
 import android.content.Context;
 import android.content.SharedPreferences;

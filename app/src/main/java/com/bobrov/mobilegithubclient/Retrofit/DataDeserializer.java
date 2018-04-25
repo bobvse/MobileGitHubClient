@@ -10,6 +10,7 @@ import com.google.gson.JsonParseException;
 import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class DataDeserializer implements JsonDeserializer<AuthorAndCommitter> {
@@ -23,13 +24,36 @@ public class DataDeserializer implements JsonDeserializer<AuthorAndCommitter> {
             String date = (jsonObject.get("date").getAsString());
 
         SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+
         try {
+            Calendar calendar = Calendar.getInstance();
+
             Date d = f.parse(date);
             long milliseconds = d.getTime();
+            calendar.setTimeInMillis(milliseconds);
             data.setDate(milliseconds);
+
+            data.setYear(calendar.get(Calendar.YEAR));
+            data.setMonth(calendar.get(Calendar.MONTH));
+            data.setDay(calendar.get(Calendar.DAY_OF_MONTH));
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+
+
+//
+//        int mYear = calendar.get(Calendar.YEAR);
+//        int mMonth = calendar.get(Calendar.MONTH);
+//        int mDay = calendar.get(Calendar.DAY_OF_MONTH);
+//
+//
+//        int mYear = calendar.get(Calendar.YEAR);
+//        int mMonth = calendar.get(Calendar.MONTH);
+//        int mDay = calendar.get(Calendar.DAY_OF_MONTH);
+
+
+
         return data;
     }
 }

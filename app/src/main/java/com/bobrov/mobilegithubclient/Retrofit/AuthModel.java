@@ -1,4 +1,4 @@
-package com.bobrov.mobilegithubclient;
+package com.bobrov.mobilegithubclient.Retrofit;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -28,7 +28,7 @@ public class AuthModel implements Serializable {
     private String field;
     private String description;
 
-    AuthModel(){
+    public AuthModel(){
 
     }
 

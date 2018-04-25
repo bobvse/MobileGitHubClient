@@ -1,4 +1,4 @@
-package com.bobrov.mobilegithubclient;
+package com.bobrov.mobilegithubclient.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.bobrov.mobilegithubclient.R;
 import com.bobrov.mobilegithubclient.Responses.ReposResponse;
 
 import java.util.List;
