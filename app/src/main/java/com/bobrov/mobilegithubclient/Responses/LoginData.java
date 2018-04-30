@@ -1,4 +1,4 @@
-package com.bobrov.mobilegithubclient;
+package com.bobrov.mobilegithubclient.Responses;
 
 import com.google.gson.annotations.SerializedName;
 

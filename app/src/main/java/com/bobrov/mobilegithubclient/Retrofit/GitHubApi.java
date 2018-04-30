@@ -1,6 +1,6 @@
 package com.bobrov.mobilegithubclient.Retrofit;
 
-import com.bobrov.mobilegithubclient.LoginData;
+import com.bobrov.mobilegithubclient.Responses.LoginData;
 import com.bobrov.mobilegithubclient.Responses.BranchResponse;
 import com.bobrov.mobilegithubclient.Responses.CommitsResponse;
 import com.bobrov.mobilegithubclient.Responses.ReposResponse;

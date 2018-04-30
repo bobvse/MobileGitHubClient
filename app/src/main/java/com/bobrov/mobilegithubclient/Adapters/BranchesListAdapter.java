@@ -63,7 +63,7 @@ public class BranchesListAdapter extends BaseAdapter {
         TextView branchName;
 
         public ViewHolder(View view) {
-            branchName = (TextView) view.findViewById(R.id.branch_list_item_name_tv);
+            branchName = view.findViewById(R.id.branch_list_item_name_tv);
         }
     }
 

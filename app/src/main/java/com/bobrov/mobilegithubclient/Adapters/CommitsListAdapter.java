@@ -70,37 +70,68 @@ public class CommitsListAdapter extends BaseAdapter {
 //        notifyDataSetChanged();
 //    }
 
+//    public void setData(List<CommitsResponse> commitsList) {
+//        int currentDate;
+//        int nextDate;
+//
+//        dataList = new ArrayList<>();
+//        int count = 0;
+//        for (int i = 0; i < commitsList.size(); i++) {
+//            currentDate = commitsList.get(i).getCommit().getAuthor().getDay();
+//            if (i < commitsList.size() - 1) {
+//                nextDate = commitsList.get(i + 1).getCommit().getAuthor().getDay();
+//            } else {
+//                nextDate = commitsList.get(i).getCommit().getAuthor().getDay();
+//            }
+//
+//            if (currentDate != nextDate) {
+//                if (i != 0) {
+//                    dataList.add(new SeparatorEntity(commitsList.get(i-1).getCommit().getAuthor().getDate()));
+//                    dataList.add(new CommitEntity(commitsList.get(i).getCommit().getMessage(), commitsList.get(i).getAuthor().getLogin()));
+//                } else {
+//                    dataList.add(new SeparatorEntity(commitsList.get(i).getCommit().getAuthor().getDate()));
+//                    dataList.add(new CommitEntity(commitsList.get(i).getCommit().getMessage(), commitsList.get(i).getAuthor().getLogin()));
+//                }
+//            } else {
+//                count++;
+//                dataList.add(new CommitEntity(commitsList.get(i).getCommit().getMessage(), commitsList.get(i).getAuthor().getLogin()));
+//                if (count == commitsList.size()) {
+//                    dataList.add(0, new SeparatorEntity(commitsList.get(0).getCommit().getAuthor().getDate()));
+//                }
+//
+//            }
+//
+//
+//        }
+//        notifyDataSetChanged();
+//    }
+
     public void setData(List<CommitsResponse> commitsList) {
         int currentDate;
         int nextDate;
 
         dataList = new ArrayList<>();
         int count = 0;
-        for (int i = 0; i < commitsList.size(); i++) {
-            currentDate = commitsList.get(i).getCommit().getAuthor().getDay();
-            if (i < commitsList.size() - 1) {
-                nextDate = commitsList.get(i + 1).getCommit().getAuthor().getDay();
-            } else {
-                nextDate = commitsList.get(i).getCommit().getAuthor().getDay();
-            }
+
+        if (commitsList.size() == 1) {
+            dataList.add(new SeparatorEntity(commitsList.get(0).getCommit().getAuthor().getDate()));
+            dataList.add(new CommitEntity(commitsList.get(0).getCommit().getMessage(), commitsList.get(0).getAuthor().getLogin()));
+        }
+
+        for (int i = 1; i < commitsList.size(); i++) {
+            nextDate = commitsList.get(i).getCommit().getAuthor().getDay();
+            currentDate = commitsList.get(i - 1).getCommit().getAuthor().getDay();
 
             if (currentDate != nextDate) {
-                if (i != 0) {
-                    dataList.add(new SeparatorEntity(commitsList.get(i-1).getCommit().getAuthor().getDate()));
-                    dataList.add(new CommitEntity(commitsList.get(i).getCommit().getMessage(), commitsList.get(i).getAuthor().getLogin()));
-                } else {
-                    dataList.add(new SeparatorEntity(commitsList.get(i).getCommit().getAuthor().getDate()));
-                    dataList.add(new CommitEntity(commitsList.get(i).getCommit().getMessage(), commitsList.get(i).getAuthor().getLogin()));
-                }
+                dataList.add(new SeparatorEntity(commitsList.get(i).getCommit().getAuthor().getDate()));
+                dataList.add(new CommitEntity(commitsList.get(i).getCommit().getMessage(), commitsList.get(i).getAuthor().getLogin()));
             } else {
                 count++;
                 dataList.add(new CommitEntity(commitsList.get(i).getCommit().getMessage(), commitsList.get(i).getAuthor().getLogin()));
-                if (count == commitsList.size()) {
+                if (count == commitsList.size() - 1) {
                     dataList.add(0, new SeparatorEntity(commitsList.get(0).getCommit().getAuthor().getDate()));
                 }
-
             }
-
 
         }
         notifyDataSetChanged();

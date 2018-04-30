@@ -30,7 +30,7 @@ public class SplashActivity extends AppCompatActivity {
         sp = getSharedPreferences(LoginBasicActivity.MY_SETTINGS, Context.MODE_PRIVATE);
         String token = sp.getString("Token", null);
         if (token == null) {
-            startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(this, LoginBasicActivity.class));
         } else {
             startActivity(new Intent(this, ProfileActivity.class));
         }

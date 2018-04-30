@@ -25,13 +25,7 @@
             android:name=".LoginBasicActivity"
             android:label="Введите имя пользователя и пароль"
             android:theme="@style/Theme.AppCompat.Dialog" />
-        <activity
-            android:name=".AccessTokenActivity"
-            android:label="Авторизация с помощью токена"
-            android:theme="@style/Theme.AppCompat.Dialog" />
         <activity android:name=".ProfileActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".ReposActivity" />
         <activity android:name=".CommitsActivity"></activity>
     </application>
 

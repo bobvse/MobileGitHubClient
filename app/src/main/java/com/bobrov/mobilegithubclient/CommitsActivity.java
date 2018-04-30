@@ -58,7 +58,7 @@ public class CommitsActivity extends AppCompatActivity {
     }
 
     private void getData() {
-        currentRepo = (ReposResponse) getIntent().getSerializableExtra(ReposActivity.EXTRA_REPOSITORY_KEY);
+        currentRepo = (ReposResponse) getIntent().getSerializableExtra(ProfileActivity.EXTRA_REPOSITORY_KEY);
     }
 
     private void loadCommits() {

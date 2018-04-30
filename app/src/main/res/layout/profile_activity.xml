@@ -6,11 +6,21 @@
     android:orientation="vertical"
     tools:context=".ProfileActivity">
 
-    <TextView
-        android:id="@+id/profile_activity_id_texView"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="20dp"
-        tools:text="id"/>
+        android:layout_height="match_parent"
+        android:background="#0D000000"
+        android:id="@+id/profile_relative_progress"
+        android:visibility="visible">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:visibility="visible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/profile_activity_name_texView"
@@ -18,17 +28,14 @@
         android:layout_height="20dp"
         tools:text="name"/>
 
-    <TextView
-        android:id="@+id/profile_activity_repos_texView"
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        tools:text="repos"/>
 
-    <Button
-        android:id="@+id/profile_activity_repos_button"
+    <ListView
+        android:id="@+id/repos_list_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Repos" />
+        tools:layout_height="100dp"
+        android:divider="@color/colorPrimaryDark"
+        tools:listitem="@layout/repos_list_item" />
 
     <Button
         android:id="@+id/profile_activity_logout_button"
