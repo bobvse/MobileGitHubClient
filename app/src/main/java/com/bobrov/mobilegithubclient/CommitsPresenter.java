@@ -65,6 +65,7 @@ public class CommitsPresenter extends MvpPresenter<CommitsView> {
                 commitsResponses = response.body();
                 getViewState().showCommitsList(commitsResponses);
                 getViewState().showCountCommits(commitsResponses.size());
+                getViewState().hideProgress();
             }
 
             @Override

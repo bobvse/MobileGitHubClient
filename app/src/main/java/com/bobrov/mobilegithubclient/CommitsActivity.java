@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -24,6 +25,7 @@ public class CommitsActivity extends MvpAppCompatActivity implements CommitsView
     private CommitsListAdapter commitsListAdapter;
     private BranchesListAdapter branchesListAdapter;
 
+    private RelativeLayout progress;
     private ListView commitsListView;
     private TextView commitsCount;
     private Spinner checkBranch;
@@ -55,6 +57,9 @@ public class CommitsActivity extends MvpAppCompatActivity implements CommitsView
         checkBranch = findViewById(R.id.branch_spinner);
         commitsListView = findViewById(R.id.commits_list_view);
 
+        progress = findViewById(R.id.commits_list_relative_progress);
+        progress.setVisibility(RelativeLayout.GONE);
+
         branchesListAdapter = new BranchesListAdapter(this);
         commitsListAdapter = new CommitsListAdapter(this);
 
@@ -63,8 +68,10 @@ public class CommitsActivity extends MvpAppCompatActivity implements CommitsView
     }
 
     private void getData() {
+        showProgress();
         currentRepo = (ReposResponse) getIntent().getSerializableExtra(ProfileActivity.EXTRA_REPOSITORY_KEY);
-        commitsPresenter.loadBranches(currentRepo);  }
+        commitsPresenter.loadBranches(currentRepo);
+    }
 
 
     private void checkBranchesCommits() {
@@ -85,12 +92,12 @@ public class CommitsActivity extends MvpAppCompatActivity implements CommitsView
 
     @Override
     public void showProgress() {
-
+        progress.setVisibility(RelativeLayout.VISIBLE);
     }
 
     @Override
     public void hideProgress() {
-
+        progress.setVisibility(RelativeLayout.GONE);
     }
 
     @Override
