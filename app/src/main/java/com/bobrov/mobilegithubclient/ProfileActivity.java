@@ -36,7 +36,7 @@ public class ProfileActivity extends MvpAppCompatActivity implements ProfileView
 
     @ProvidePresenter
     public ProfilePresenter providePresenter() {
-        return new ProfilePresenter(getSharedPreferences(MY_SETTINGS, Context.MODE_PRIVATE));
+        return new ProfilePresenter(getSharedPreferences(LoginBasicActivity.MY_SETTINGS, Context.MODE_PRIVATE));
     }
 
     @Override
@@ -72,10 +72,13 @@ public class ProfileActivity extends MvpAppCompatActivity implements ProfileView
         }
     }
 
+
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(this, CommitsActivity.class);
         intent.putExtra(EXTRA_REPOSITORY_KEY, (ReposResponse) reposListAdapter.getItem(position));
+
         startActivity(intent);
     }
 

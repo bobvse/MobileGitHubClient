@@ -1,8 +1,6 @@
 package com.bobrov.mobilegithubclient;
 
 import android.content.SharedPreferences;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
