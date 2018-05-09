@@ -39,7 +39,7 @@ public class ProfilePresenter extends MvpPresenter<ProfileView> {
                 if (response.code() == 200) {
                     getViewState().setDataIntoView(response.body());
                 } else {
-                    //TODO
+                    //TODO ошибка
                 }
             }
 

@@ -3,4 +3,7 @@
     <string name="Client_ID_Oath">f8c5756527291555ea68</string>
     <string name="Client_Secret_Oath">1f985d37e1cc86a17b44b2882ab330fb0508ccd3</string>
     <string name="LoginUrl">https://api.github.com/</string>
+
+    <string name="Commit">Commit</string>
+    <string name="Commits">Commits</string>
 </resources>

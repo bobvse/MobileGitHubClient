@@ -3,7 +3,8 @@ package com.bobrov.mobilegithubclient.Responses;
 public class SeparatorEntity extends Entity {
     private long date;
 
-    public SeparatorEntity(){}
+    public SeparatorEntity() {
+    }
 
     public SeparatorEntity(long date) {
         this.date = date;
@@ -18,7 +19,7 @@ public class SeparatorEntity extends Entity {
     }
 
     @Override
-    public int getType(){
+    public int getType() {
         return Entity.SEPARATOR_TYPE;
     }
 }

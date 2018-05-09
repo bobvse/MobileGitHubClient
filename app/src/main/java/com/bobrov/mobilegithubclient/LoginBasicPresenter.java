@@ -1,9 +1,6 @@
 package com.bobrov.mobilegithubclient;
 
-import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.widget.Toast;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
@@ -39,7 +36,7 @@ public class LoginBasicPresenter extends MvpPresenter<LoginBasicView> {
         api.doLogin(getConfigData()).enqueue(new Callback<LoginData>() {
             @Override
             public void onResponse(Call<LoginData> call, Response<LoginData> response) {
-                if(response.code()!=422) {
+                if (response.code() != 422) {
                     LoginData loginData = response.body();
 
                     //TODO constant
@@ -51,7 +48,7 @@ public class LoginBasicPresenter extends MvpPresenter<LoginBasicView> {
 
                     getViewState().hideProgress();
                     getViewState().startProfile();
-                }else {
+                } else {
                     //TODO SHOW ERROR
                 }
 

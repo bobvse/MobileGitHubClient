@@ -32,7 +32,9 @@ public class RetrofitSingleton {
         }
         return instance;
     }
-    private RetrofitSingleton() { }
+
+    private RetrofitSingleton() {
+    }
 
     public Retrofit init(String authToken) {
         retrofit = new Retrofit.Builder()
@@ -53,7 +55,7 @@ public class RetrofitSingleton {
                 .excludeFieldsWithModifiers(Modifier.FINAL, Modifier.TRANSIENT, Modifier.STATIC)
                 .setDateFormat("yyyy-MM-dd HH:mm:ss")
                 .setPrettyPrinting()
-                .registerTypeAdapter(AuthorAndCommitter.class,new DataDeserializer())
+                .registerTypeAdapter(AuthorAndCommitter.class, new DataDeserializer())
                 .create();
         return gson;
     }

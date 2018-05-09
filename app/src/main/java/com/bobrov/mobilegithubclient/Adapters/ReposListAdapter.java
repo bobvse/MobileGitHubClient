@@ -65,8 +65,8 @@ public class ReposListAdapter extends BaseAdapter {
         TextView repoDescription;
 
         public ViewHolder(View view) {
-            repoName = (TextView) view.findViewById(R.id.repos_list_item_name_tv);
-            repoDescription = (TextView) view.findViewById(R.id.repos_list_item_description_tv);
+            repoName = view.findViewById(R.id.repos_list_item_name_tv);
+            repoDescription = view.findViewById(R.id.repos_list_item_description_tv);
         }
     }
 

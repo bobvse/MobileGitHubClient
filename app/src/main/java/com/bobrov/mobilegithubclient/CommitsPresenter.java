@@ -35,27 +35,26 @@ public class CommitsPresenter extends MvpPresenter<CommitsView> {
     }
 
     public void loadBranches(ReposResponse repo) {
+        getViewState().showProgress();
         String token = sp.getString("Token", null);
-        currentRepo=repo;
+        currentRepo = repo;
         api = RetrofitSingleton.getInstance().init(token).create(GitHubApi.class);
         api.getBranches(repo.getOwner().getLogin(), repo.getName()).enqueue(new Callback<List<BranchResponse>>() {
             @Override
             public void onResponse(Call<List<BranchResponse>> call, Response<List<BranchResponse>> response) {
-
                 branches = response.body();
                 getViewState().showBranches(branches);
-
+                getViewState().hideProgress();
             }
 
             @Override
             public void onFailure(Call<List<BranchResponse>> call, Throwable t) {
-                String tt = t.toString();
             }
         });
     }
 
-
     public void loadCommitsBranches(String sha) {
+        getViewState().showProgress();
         String token = sp.getString("Token", null);
         api = RetrofitSingleton.getInstance().init(token).create(GitHubApi.class);
 

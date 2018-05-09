@@ -37,12 +37,10 @@ public class LoginBasicActivity extends MvpAppCompatActivity implements LoginBas
     private void initComponents() {
         findViewById(R.id.login_activity_ok_button).setOnClickListener(this);
         findViewById(R.id.login_activity_cancel_button).setOnClickListener(this);
+
         progress_login = findViewById(R.id.relative_progress_login_activity);
         loginInput = findViewById(R.id.login_activity_editext_login);
         passwordInput = findViewById(R.id.login_activity_input_password_editext);
-
-        progress_login.setVisibility(RelativeLayout.GONE);
-
     }
 
     @Override

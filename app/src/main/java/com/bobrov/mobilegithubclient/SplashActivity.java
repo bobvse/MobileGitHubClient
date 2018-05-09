@@ -6,17 +6,10 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.bobrov.mobilegithubclient.Retrofit.GitHubApi;
-import com.bobrov.mobilegithubclient.Retrofit.RetrofitSingleton;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 public class SplashActivity extends AppCompatActivity {
     public static final String EXTRA_USER_DATA_KEY = "userKey";
     SharedPreferences sp;
-
+    private Context context;
 
 
     @Override

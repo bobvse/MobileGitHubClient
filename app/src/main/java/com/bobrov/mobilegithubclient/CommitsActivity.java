@@ -45,6 +45,7 @@ public class CommitsActivity extends MvpAppCompatActivity implements CommitsView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.commits_activity);
+
         initComponents();
 
         getData();
@@ -52,7 +53,7 @@ public class CommitsActivity extends MvpAppCompatActivity implements CommitsView
         checkBranchesCommits();
     }
 
-    private void initComponents(){
+    private void initComponents() {
         commitsCount = findViewById(R.id.commit_count_tv);
         checkBranch = findViewById(R.id.branch_spinner);
         commitsListView = findViewById(R.id.commits_list_view);
@@ -68,7 +69,6 @@ public class CommitsActivity extends MvpAppCompatActivity implements CommitsView
     }
 
     private void getData() {
-        showProgress();
         currentRepo = (ReposResponse) getIntent().getSerializableExtra(ProfileActivity.EXTRA_REPOSITORY_KEY);
         commitsPresenter.loadBranches(currentRepo);
     }
@@ -80,7 +80,6 @@ public class CommitsActivity extends MvpAppCompatActivity implements CommitsView
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 BranchResponse br1 = (BranchResponse) branchesListAdapter.getItem(position);
                 commitsPresenter.loadCommitsBranches(br1.getCommit().getSha());
-
             }
 
             @Override
@@ -117,7 +116,10 @@ public class CommitsActivity extends MvpAppCompatActivity implements CommitsView
 
     @Override
     public void showCountCommits(int count) {
-        //todo e+s
-        commitsCount.setText(count + " commits");
+        if (count == 1) {
+            commitsCount.setText(count + " " + this.getResources().getString(R.string.Commit));
+        } else {
+            commitsCount.setText(count + " " + this.getResources().getString(R.string.Commits));
+        }
     }
 }

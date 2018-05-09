@@ -1,8 +1,5 @@
 package com.bobrov.mobilegithubclient.Retrofit;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -28,7 +25,7 @@ public class AuthModel implements Serializable {
     private String field;
     private String description;
 
-    public AuthModel(){
+    public AuthModel() {
 
     }
 

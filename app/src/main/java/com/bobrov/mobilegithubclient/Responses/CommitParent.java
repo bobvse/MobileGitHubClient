@@ -3,8 +3,6 @@ package com.bobrov.mobilegithubclient.Responses;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 public class CommitParent implements Serializable {
     private String sha;

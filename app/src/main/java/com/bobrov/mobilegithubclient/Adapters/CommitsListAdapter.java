@@ -20,91 +20,13 @@ import java.util.Locale;
 
 public class CommitsListAdapter extends BaseAdapter {
 
-    //TODO millis
-    private static final long SECOND_IN_DAY = 60 * 60 * 24 * 1000;
-
     private Context context;
     private List<Entity> dataList;
+    SimpleDateFormat sdf;
 
     public CommitsListAdapter(Context context) {
         this.context = context;
     }
-
-//    public void setData(List<CommitsResponse> commitsList) {
-//        long currentDate;
-//        long nextDate;
-//
-//        dataList = new ArrayList<>();
-//        int count = 0;
-//        for (int i = 0; i < commitsList.size(); i++) {
-//            currentDate = commitsList.get(i).getCommit().getAuthor().getDate();
-//            if (i < commitsList.size() - 1) {
-//                nextDate = commitsList.get(i + 1).getCommit().getAuthor().getDate();
-//            } else {
-//                nextDate = commitsList.get(i).getCommit().getAuthor().getDate();
-//            }
-//
-//            if (commitsList.size() == 1) {
-//                dataList.add(new SeparatorEntity(commitsList.get(i).getCommit().getAuthor().getDate()));
-//                dataList.add(new CommitEntity(commitsList.get(i).getCommit().getMessage(), commitsList.get(i).getAuthor().getLogin()));
-//
-//            } else {
-//                if ((Math.abs(nextDate - currentDate) > SECOND_IN_DAY)) {
-//                    dataList.add(new SeparatorEntity(commitsList.get(i).getCommit().getAuthor().getDate()));
-//                    dataList.add(new CommitEntity(commitsList.get(i).getCommit().getMessage(), commitsList.get(i).getAuthor().getLogin()));
-//                } else {
-//                    count++;
-//                    dataList.add(new CommitEntity(commitsList.get(i).getCommit().getMessage(), commitsList.get(i).getAuthor().getLogin()));
-//                    if (count == commitsList.size()) {
-//                        dataList.add(0, new SeparatorEntity(commitsList.get(0).getCommit().getAuthor().getDate()));
-//                    }
-//                }
-//            }
-//
-//            if (i == commitsList.size() - 1) {
-//                dataList.add(0, new SeparatorEntity(commitsList.get(0).getCommit().getAuthor().getDate()));
-//            }
-//        }
-//
-//
-//        notifyDataSetChanged();
-//    }
-
-//    public void setData(List<CommitsResponse> commitsList) {
-//        int currentDate;
-//        int nextDate;
-//
-//        dataList = new ArrayList<>();
-//        int count = 0;
-//        for (int i = 0; i < commitsList.size(); i++) {
-//            currentDate = commitsList.get(i).getCommit().getAuthor().getDay();
-//            if (i < commitsList.size() - 1) {
-//                nextDate = commitsList.get(i + 1).getCommit().getAuthor().getDay();
-//            } else {
-//                nextDate = commitsList.get(i).getCommit().getAuthor().getDay();
-//            }
-//
-//            if (currentDate != nextDate) {
-//                if (i != 0) {
-//                    dataList.add(new SeparatorEntity(commitsList.get(i-1).getCommit().getAuthor().getDate()));
-//                    dataList.add(new CommitEntity(commitsList.get(i).getCommit().getMessage(), commitsList.get(i).getAuthor().getLogin()));
-//                } else {
-//                    dataList.add(new SeparatorEntity(commitsList.get(i).getCommit().getAuthor().getDate()));
-//                    dataList.add(new CommitEntity(commitsList.get(i).getCommit().getMessage(), commitsList.get(i).getAuthor().getLogin()));
-//                }
-//            } else {
-//                count++;
-//                dataList.add(new CommitEntity(commitsList.get(i).getCommit().getMessage(), commitsList.get(i).getAuthor().getLogin()));
-//                if (count == commitsList.size()) {
-//                    dataList.add(0, new SeparatorEntity(commitsList.get(0).getCommit().getAuthor().getDate()));
-//                }
-//
-//            }
-//
-//
-//        }
-//        notifyDataSetChanged();
-//    }
 
     public void setData(List<CommitsResponse> commitsList) {
         int currentDate;
@@ -134,6 +56,7 @@ public class CommitsListAdapter extends BaseAdapter {
             }
 
         }
+        sdf = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
         notifyDataSetChanged();
     }
 
@@ -181,8 +104,6 @@ public class CommitsListAdapter extends BaseAdapter {
                 }
                 SeparatorEntity separatorEntity = (SeparatorEntity) getItem(position);
 
-                //TODO
-                SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy H:mm", Locale.getDefault());
                 String dateString = sdf.format(separatorEntity.getDate());
                 viewHolderData.date.setText(dateString);
                 break;

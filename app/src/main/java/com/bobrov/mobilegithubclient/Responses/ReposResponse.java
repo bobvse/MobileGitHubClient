@@ -1,12 +1,10 @@
 package com.bobrov.mobilegithubclient.Responses;
 
-import com.bobrov.mobilegithubclient.Responses.OwnerResponse;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
 public class ReposResponse implements Serializable {
-    //TODO тут не все дописать при необходимости
     private String id;
     private String name;
     @SerializedName("full_name")
@@ -70,7 +68,7 @@ public class ReposResponse implements Serializable {
         return svnUrl;
     }
 
-    private static class Premissions implements Serializable{
+    private static class Premissions implements Serializable {
         private boolean admin;
         private boolean push;
         private boolean pull;

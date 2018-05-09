@@ -2,14 +2,12 @@ package com.bobrov.mobilegithubclient;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -17,12 +15,8 @@ import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.bobrov.mobilegithubclient.Adapters.ReposListAdapter;
 import com.bobrov.mobilegithubclient.Responses.ReposResponse;
 import com.bobrov.mobilegithubclient.Responses.UserResponse;
-import com.bobrov.mobilegithubclient.Retrofit.GitHubApi;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import static com.bobrov.mobilegithubclient.LoginBasicActivity.MY_SETTINGS;
 
 public class ProfileActivity extends MvpAppCompatActivity implements ProfileView, View.OnClickListener, AdapterView.OnItemClickListener {
     public static String EXTRA_REPOSITORY_KEY = "repo_key";
@@ -71,8 +65,6 @@ public class ProfileActivity extends MvpAppCompatActivity implements ProfileView
                 break;
         }
     }
-
-
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

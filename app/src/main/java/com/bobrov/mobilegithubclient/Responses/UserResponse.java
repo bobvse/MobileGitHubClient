@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-//TODO узнать про имена таких классов
+
 public class UserResponse implements Serializable {
     private String id;
     @SerializedName("login")
@@ -35,7 +35,6 @@ public class UserResponse implements Serializable {
     public void setPublicRepos(String publicRepos) {
         this.publicRepos = publicRepos;
     }
-
 
 
 }

@@ -3,12 +3,10 @@ package com.bobrov.mobilegithubclient;
 import com.arellomobile.mvp.MvpView;
 import com.bobrov.mobilegithubclient.Responses.BranchResponse;
 import com.bobrov.mobilegithubclient.Responses.CommitsResponse;
-import com.bobrov.mobilegithubclient.Responses.ReposResponse;
-import com.bobrov.mobilegithubclient.Responses.UserResponse;
 
 import java.util.List;
 
-public interface CommitsView  extends MvpView {
+public interface CommitsView extends MvpView {
     void showProgress();
 
     void hideProgress();
